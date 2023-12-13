@@ -1,51 +1,58 @@
 package tests;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.options.UiAutomator2Options;
-import io.appium.java_client.service.local.AppiumDriverLocalService;
-import io.appium.java_client.service.local.AppiumServiceBuilder;
+import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.BeforeClass;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.*;
+import utils.Helpers;
+import utils.PlatformName;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
+
 public class BaseTest {
-    public AndroidDriver driver;
-    public AppiumDriverLocalService service;
-
-    @BeforeClass
-    public void configureAppium() throws MalformedURLException {
-
-        service = new AppiumServiceBuilder().withAppiumJS(new File("//usr//local//lib//node_modules//appium//build//lib//main.js"))
-                .withIPAddress("127.0.0.1").usingPort(4723).build();
-        service.start();
+    AppiumDriver driver;
+    Helpers helpers;
+    WebDriverWait wait;
+    PlatformName platformName;
 
 
+    @BeforeMethod
+    @Parameters({"platform", "device", "osVersion"})
+
+    public void configureAppium(@Optional("android") String platform, @Optional("Pixel_7_Pro_Api_33") String device, @Optional("13") String osVersion) throws MalformedURLException {
+
+        URL url = new URL("http://127.0.0.1:4723");
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("newCommandTimeout", 300);
-        caps.setCapability("platformName", "Android");
-        caps.setCapability("deviceName", "Pixel_3");
-        caps.setCapability("automationName", "uiautomator2");
-        caps.setCapability("udid", "emulator-5554");
-        //caps.setCapability("avd","Pixel_3");
-        //caps.setCapability("avdLaunchTimeout",20000);
 
-        caps.setCapability("appPackage", "Window{bcafa2 u0 com.example.receiptwallet");
-        caps.setCapability("appActivity", "io.appium.android.apis.ApiDemos");
+        caps.setCapability("newCommandTimeout", "3000");
+        caps.setCapability("platformName", platform);
+        caps.setCapability("deviceName", device);
+        caps.setCapability("osVersion", osVersion);
 
-        UiAutomator2Options options = new UiAutomator2Options().
-                setDeviceName("Pixel_7_Pro_API_33").
-                setAutomationName("UiAutomator2");
-               // setApp();
+        if (platform.equalsIgnoreCase("android")) {
+            platformName = PlatformName.ANDROID;
+            caps.setCapability("automationName", "uiautomator2");
+            caps.setCapability("appPackage", "com.example.receiptwallet");
+            caps.setCapability("appActivity", "com.example.receiptwallet.MainActivity");
+            caps.setCapability("appActivity", "com.example.receiptwallet.SplashScreenActivity");
+            caps.setCapability("noReset", false);
 
-       // URL url = new URL("http://127.0.0.1:4723/");
+            driver = new AndroidDriver(url, caps);
 
-       // driver = new AndroidDriver(url, options);
-      //  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        } else {
+            platformName = PlatformName.IOS;
+            caps.setCapability("automationName", "XCUITest");
+            caps.setCapability("udid", "value for it");
+            caps.setCapability("bundelID", "");
+            driver = new IOSDriver(url, caps);
+        }
 
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        helpers = new Helpers(wait, driver, platformName);
     }
-
 }
