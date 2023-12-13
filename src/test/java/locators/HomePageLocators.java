@@ -5,7 +5,7 @@ import tests.BaseTest;
 
 public class HomePageLocators extends BaseTest {
 
-    String pageTittle = "//android.widget.TextView[@text='Receipt Wallet']";
+    String homeScreenTittle = "//android.widget.TextView[@text='Receipt Wallet']";
     String homeBtn = "home";
     String homeText = "//android.widget.TextView[@text='home']";
     String homeIcon = "(//android.widget.ImageView[@resource-id='com.example.receiptwallet:id/navigation_bar_item_icon_view'])[2]";
@@ -14,8 +14,8 @@ public class HomePageLocators extends BaseTest {
     String expenseIcon = "(//android.widget.ImageView[@resource-id='com.example.receiptwallet:id/navigation_bar_item_icon_view'])[1]";
 
 
-    public String getPageTittle() {
-        return pageTittle;
+    public String getHomeScreenTittle() {
+        return homeScreenTittle;
     }
 
     public String getHomeBtn() {
