@@ -3,8 +3,12 @@ package tests;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.*;
 import utils.Helpers;
 import utils.PlatformName;
@@ -33,6 +37,7 @@ public class BaseTest {
         caps.setCapability("platformName", platform);
         caps.setCapability("deviceName", device);
         caps.setCapability("osVersion", osVersion);
+        caps.setCapability("autoGrantPermissions", "true");
 
         if (platform.equalsIgnoreCase("android")) {
             platformName = PlatformName.ANDROID;
@@ -55,4 +60,6 @@ public class BaseTest {
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         helpers = new Helpers(wait, driver, platformName);
     }
+
+
 }

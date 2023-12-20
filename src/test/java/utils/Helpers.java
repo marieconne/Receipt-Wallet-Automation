@@ -4,9 +4,11 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -42,4 +44,14 @@ public class Helpers {
         }
 
     }
+
+    public WebElement waitForElementByID(String id) {
+        try {
+            return (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(new By.ById(id)));
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
+
+
