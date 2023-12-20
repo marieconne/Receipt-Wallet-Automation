@@ -21,14 +21,19 @@
             <version>9.0.0</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.infinispan/infinispan-core -->
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-core</artifactId>
+            <version>15.0.0.Dev05</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.7.0</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
-
-
 </project>

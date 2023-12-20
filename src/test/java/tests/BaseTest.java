@@ -19,8 +19,8 @@ import java.time.Duration;
 
 
 public class BaseTest {
-    AppiumDriver driver;
-    Helpers helpers;
+    static AppiumDriver driver;
+    static Helpers helpers;
     WebDriverWait wait;
     PlatformName platformName;
 
@@ -46,6 +46,8 @@ public class BaseTest {
             caps.setCapability("appActivity", "com.example.receiptwallet.MainActivity");
             caps.setCapability("appActivity", "com.example.receiptwallet.SplashScreenActivity");
             caps.setCapability("noReset", false);
+            caps.setCapability("autoGrantPermissions", "true");
+
 
             driver = new AndroidDriver(url, caps);
 
