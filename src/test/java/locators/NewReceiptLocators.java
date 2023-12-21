@@ -28,7 +28,7 @@ public class NewReceiptLocators extends BaseTest {
     public static final String euroRB = "rbEuro";
     public static final String saveBtn = "btnSaveNewReceipt";
     public static final String cancelBtn = "btnCancel";
-    public static final String  addImageBtn = "Add receipt photo";
+    public static final String  addImageBtn = "addReceiptPhoto";
     public static final String openCameraBtn = "openCameraBtn";
     public static final String uploadPictureBtn = "uploadPictureBtn";
     public static final String closePopUpCameraBtn = "closePopUpCameraBtn";

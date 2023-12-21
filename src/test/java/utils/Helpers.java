@@ -1,11 +1,13 @@
 package utils;
 
+import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import locators.HomeScreenLocators;
 import locators.NewReceiptLocators;
 import model.WarrantyCardsData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -54,15 +56,20 @@ public class Helpers {
         }
     }
 
+    public void scrollToRealme8() {
+        driver.findElement(AppiumBy.androidUIAutomator
+                ("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Realme 8\"));")).click();
+    }
+
     public void addWarrantyCards() {
         String[][] cardData = {
-                {WarrantyCardsData.nameHonor, WarrantyCardsData.warrantyLength, WarrantyCardsData.cost1, WarrantyCardsData.date1, NewReceiptLocators.selectCategoryITComponent},
+                {WarrantyCardsData.nameHonorP20, WarrantyCardsData.warrantyLength, WarrantyCardsData.cost1, WarrantyCardsData.date1, NewReceiptLocators.selectCategoryITComponent},
                 {WarrantyCardsData.nameBed, WarrantyCardsData.warrantyLength1, WarrantyCardsData.cost2, WarrantyCardsData.date8, NewReceiptLocators.selectCategoryFurniture},
                 {WarrantyCardsData.nameSamsung, WarrantyCardsData.warrantyLength3, WarrantyCardsData.cost3, WarrantyCardsData.date7,NewReceiptLocators.selectCategoryTv},
                 {WarrantyCardsData.nameLenovo, WarrantyCardsData.warrantyLength2, WarrantyCardsData.cost4, WarrantyCardsData.date6,NewReceiptLocators.selectCategoryITComponent},
                 {WarrantyCardsData.nameRealme, WarrantyCardsData.warrantyLength2, WarrantyCardsData.cost5, WarrantyCardsData.date5,NewReceiptLocators.selectCategoryITComponent},
                 {WarrantyCardsData.nameSamsung, WarrantyCardsData.warrantyLength3, WarrantyCardsData.cost6, WarrantyCardsData.date4,NewReceiptLocators.selectCategoryITComponent},
-                {WarrantyCardsData.nameHonor, WarrantyCardsData.warrantyLength2, WarrantyCardsData.cost7, WarrantyCardsData.date3,NewReceiptLocators.selectCategoryITComponent},
+                {WarrantyCardsData.nameHonor90, WarrantyCardsData.warrantyLength2, WarrantyCardsData.cost7, WarrantyCardsData.date3,NewReceiptLocators.selectCategoryITComponent},
                 {WarrantyCardsData.nameMakeUp, WarrantyCardsData.warrantyLength3, WarrantyCardsData.cost8, WarrantyCardsData.date2,NewReceiptLocators.selectCategoryOther},
                 {WarrantyCardsData.nameTesla, WarrantyCardsData.warrantyLength2, WarrantyCardsData.cost9, WarrantyCardsData.date7,NewReceiptLocators.selectCategoryVehicle},
         };
@@ -101,7 +108,7 @@ public class Helpers {
         enterCost.sendKeys(cost);
         driver.navigate().back();
 
-        waitForElementByAccessibilityId(NewReceiptLocators.rsdRB).click();
+        //waitForElementByAccessibilityId(NewReceiptLocators.rsdRB).click();
         waitForElementByAccessibilityId(NewReceiptLocators.euroRB).click();
         waitForElementByAccessibilityId(NewReceiptLocators.addImageBtn).click();
         waitForElementByAccessibilityId(NewReceiptLocators.openCameraBtn).click();
